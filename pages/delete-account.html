@@ -1,0 +1,115 @@
+<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <main>
+      <article class="lang-content" data-lang="es">
+        <p>Si quieres eliminar tu cuenta de <strong>GGFacts</strong> y los datos asociados, puedes solicitarlo enviando un email a <a class="email-link" href="mailto:ggdailyfacts@gmail.com?subject=Solicitud%20de%20eliminaci%C3%B3n%20de%20cuenta%20GGFacts&body=Hola%2C%20quiero%20solicitar%20la%20eliminaci%C3%B3n%20de%20mi%20cuenta%20de%20GGFacts.%0A%0AEmail%20de%20la%20cuenta%3A%20%0A%0AInformaci%C3%B3n%20adicional%20si%20es%20necesaria%3A%20">ggdailyfacts@gmail.com</a>.</p>
+
+        <div class="notice">
+          <strong>Qué incluir en el email:</strong>
+          <ul>
+            <li>el correo asociado a tu cuenta,</li>
+            <li>el asunto “Solicitud de eliminación de cuenta GGFacts”,</li>
+            <li>cualquier dato adicional que ayude a identificar la cuenta.</li>
+          </ul>
+        </div>
+
+        <div class="actions">
+          <a class="button primary" href="mailto:ggdailyfacts@gmail.com?subject=Solicitud%20de%20eliminaci%C3%B3n%20de%20cuenta%20GGFacts&body=Hola%2C%20quiero%20solicitar%20la%20eliminaci%C3%B3n%20de%20mi%20cuenta%20de%20GGFacts.%0A%0AEmail%20de%20la%20cuenta%3A%20%0A%0AInformaci%C3%B3n%20adicional%20si%20es%20necesaria%3A%20">Solicitar por email</a>
+          <a class="button" href="../privacy-policy/">Ver política de privacidad</a>
+        </div>
+
+        <h2>¿Qué ocurre después?</h2>
+        <p>Cuando recibamos tu solicitud, verificaremos que la petición corresponde a la cuenta correcta y procederemos a eliminar o anonimizar los datos asociados en un plazo razonable, salvo aquellos que debamos conservar por obligación legal, seguridad o prevención de fraude.</p>
+
+        <h2>¿Qué datos se eliminan?</h2>
+        <p>Con carácter general, se eliminarán o anonimizarán los datos de cuenta, favoritos, preferencias y demás datos vinculados directamente a tu perfil de usuario, salvo los datos que deban conservarse temporalmente por motivos legales o técnicos justificados.</p>
+
+        <div class="footer">
+          <p>También puedes iniciar la eliminación desde la propia App si la función “Eliminar cuenta” está disponible.</p>
+        </div>
+      </article>
+
+      <article class="lang-content" data-lang="en" hidden>
+        <p>If you want to delete your <strong>GGFacts</strong> account and related data, you can request it by sending an email to <a class="email-link" href="mailto:ggdailyfacts@gmail.com?subject=GGFacts%20account%20deletion%20request&body=Hello%2C%20I%20want%20to%20request%20deletion%20of%20my%20GGFacts%20account.%0A%0AAccount%20email%3A%20%0A%0AAdditional%20information%20if%20needed%3A%20">ggdailyfacts@gmail.com</a>.</p>
+
+        <div class="notice">
+          <strong>What to include in the email:</strong>
+          <ul>
+            <li>the email address associated with your account,</li>
+            <li>the subject “GGFacts account deletion request”,</li>
+            <li>any additional information that helps identify the account.</li>
+          </ul>
+        </div>
+
+        <div class="actions">
+          <a class="button primary" href="mailto:ggdailyfacts@gmail.com?subject=GGFacts%20account%20deletion%20request&body=Hello%2C%20I%20want%20to%20request%20deletion%20of%20my%20GGFacts%20account.%0A%0AAccount%20email%3A%20%0A%0AAdditional%20information%20if%20needed%3A%20">Request by email</a>
+          <a class="button" href="../privacy-policy/">View privacy policy</a>
+        </div>
+
+        <h2>What happens next?</h2>
+        <p>When we receive your request, we will verify that it corresponds to the correct account and then delete or anonymize the related data within a reasonable time, except for data that must be retained for legal, security, or fraud-prevention reasons.</p>
+
+        <h2>What data is deleted?</h2>
+        <p>In general, we will delete or anonymize account data, favorites, preferences, and other data directly linked to your user profile, except for data that must be temporarily retained for justified legal or technical reasons.</p>
+
+        <div class="footer">
+          <p>You may also be able to initiate deletion from within the App if the “Delete account” feature is available.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="../js/language.js"></script>
+  <script>
+    const buttons = document.querySelectorAll('[data-lang-btn]');
+    const sections = document.querySelectorAll('.lang-content');
+    const pageTitle = document.getElementById('page-title');
+    const pageSubtitle = document.getElementById('page-subtitle');
+
+    const copy = {
+      es: {
+        title: 'Política de Privacidad',
+        subtitle: 'Última actualización: 10 de marzo de 2026',
+        htmlLang: 'es'
+      },
+      en: {
+        title: 'Privacy Policy',
+        subtitle: 'Last updated: March 10, 2026',
+        htmlLang: 'en'
+      }
+    };
+
+    function setLanguage(lang) {
+      sections.forEach(section => {
+        section.hidden = section.dataset.lang !== lang;
+      });
+
+      buttons.forEach(button => {
+        button.classList.toggle('active', button.dataset.langBtn === lang);
+      });
+
+      pageTitle.textContent = copy[lang].title;
+      pageSubtitle.textContent = copy[lang].subtitle;
+      document.documentElement.lang = copy[lang].htmlLang;
+      localStorage.setItem('ggfacts-policy-lang', lang);
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => setLanguage(button.dataset.langBtn));
+    });
+
+    const savedLang = localStorage.getItem('ggfacts-policy-lang');
+    const browserLang = navigator.language && navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en';
+    setLanguage(savedLang || browserLang || 'es');
+  </script>
+
+</body>
+</html>
